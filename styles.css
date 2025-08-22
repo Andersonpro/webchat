@@ -56,18 +56,9 @@ footer {
   padding: 15px;
 }
 
-#chat-icon {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;   /* ⬅️ trocado */
-    width: 60px;
-    height: 60px;
-    background-color: #20a729;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    cursor: pointer;
-    z-index: 1000;
-}
+ #chat-icon {
+    left: 20px !important;
+    right: auto !important;
+    bottom: 20px !important;
+  }
+

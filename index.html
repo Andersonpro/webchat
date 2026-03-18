@@ -73,33 +73,35 @@
 <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>
 
  <script>
-const autoHack = setInterval(() => {
-  const form = document.getElementById('userInfoForm');
+const autoShadow = setInterval(() => {
+  const container = document.querySelector('#notificame-chat-container');
 
-  if (form) {
+  if (container && container.shadowRoot) {
 
-    form.addEventListener('submit', function(e) {
-      const nameInput = document.getElementById('userName');
-      const phoneInput = document.getElementById('userPhone');
+    const shadow = container.shadowRoot;
 
-      if (!nameInput.value) {
-        nameInput.value = 'Visitante';
-        nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+    const nameInput = shadow.getElementById('userName');
+    const phoneInput = shadow.getElementById('userPhone');
+    const form = shadow.getElementById('userInfoForm');
+
+    if (nameInput && phoneInput && form) {
+
+      function preencher(input, valor) {
+        input.value = valor;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       }
 
-      if (!phoneInput.value) {
-        phoneInput.value = '84999999999';
-        phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    });
+      preencher(nameInput, 'Visitante');
+      preencher(phoneInput, '84999999999');
 
-    // força envio automático
-    setTimeout(() => {
-      const btn = form.querySelector('button[type="submit"]');
-      if (btn) btn.click();
-    }, 500);
+      setTimeout(() => {
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn) btn.click();
+      }, 300);
 
-    clearInterval(autoHack);
+      clearInterval(autoShadow);
+    }
   }
 }, 500);
 </script>

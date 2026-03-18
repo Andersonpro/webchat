@@ -74,22 +74,21 @@
 
   <script>
 const autoStartChat = setInterval(() => {
+  const button = document.querySelector('#userInfoForm button[type="submit"]');
   const nameInput = document.getElementById('userName');
   const phoneInput = document.getElementById('userPhone');
-  const button = document.querySelector('#userInfoForm button[type="submit"]');
 
   if (nameInput && phoneInput && button) {
-    
-    // Preenche automático
+
     nameInput.value = 'Visitante';
     phoneInput.value = '84999999999';
 
-    // Remove validação obrigatória (garantia)
-    nameInput.removeAttribute('required');
-    phoneInput.removeAttribute('required');
+    nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+    phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-    // Dispara envio
-    button.click();
+    setTimeout(() => {
+      button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    }, 300);
 
     clearInterval(autoStartChat);
   }

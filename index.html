@@ -72,25 +72,34 @@
 
 <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>
 
-  <script>
-const autoStartChat = setInterval(() => {
-  const button = document.querySelector('#userInfoForm button[type="submit"]');
-  const nameInput = document.getElementById('userName');
-  const phoneInput = document.getElementById('userPhone');
+ <script>
+const autoHack = setInterval(() => {
+  const form = document.getElementById('userInfoForm');
 
-  if (nameInput && phoneInput && button) {
+  if (form) {
 
-    nameInput.value = 'Visitante';
-    phoneInput.value = '84999999999';
+    form.addEventListener('submit', function(e) {
+      const nameInput = document.getElementById('userName');
+      const phoneInput = document.getElementById('userPhone');
 
-    nameInput.dispatchEvent(new Event('input', { bubbles: true }));
-    phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
+      if (!nameInput.value) {
+        nameInput.value = 'Visitante';
+        nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+      }
 
+      if (!phoneInput.value) {
+        phoneInput.value = '84999999999';
+        phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+
+    // força envio automático
     setTimeout(() => {
-      button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    }, 300);
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.click();
+    }, 500);
 
-    clearInterval(autoStartChat);
+    clearInterval(autoHack);
   }
 }, 500);
 </script>
